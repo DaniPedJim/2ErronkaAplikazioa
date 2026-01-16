@@ -2,7 +2,7 @@ package erronka;
 
 public class LangileBurua extends LangileOrokorra{
 	//Konstruktorea
-	public LangileBurua(int id,String ize,String abi,String kar,String ema,char tel,String pas) {
+	public LangileBurua(int id,String ize,String abi,String kar,String ema,int tel,String pas) {
 		super(id,ize,abi,kar,ema,tel,pas);
 	}
 	//Metodoak

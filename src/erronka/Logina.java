@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
+import javax.swing.JTable;
 
 public class Logina extends JFrame {
 
@@ -22,6 +23,9 @@ public class Logina extends JFrame {
 	private JPanel contentPane;
 	private JTextField textErabiltzailea;
 	private JTextField textPasahitza;
+	private JTable table;
+	
+	private Pertsona p;
 
 	/**
 	 * Launch the application.
@@ -43,8 +47,8 @@ public class Logina extends JFrame {
 	 * Create the frame.
 	 */
 	public Logina() {
-		setVisible(true);
 		Connection conn = DatabaseConnection.getConnection();
+		setVisible(true);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -57,6 +61,33 @@ public class Logina extends JFrame {
 		panelMenuInfor.setVisible(false);
 		panelMenuInfor.setBounds(10, 10, 426, 253);
 		contentPane.add(panelMenuInfor);
+		panelMenuInfor.setLayout(null);
+		
+		JButton btnFitxatuS = new JButton("Fitxatu sarrera");
+		btnFitxatuS.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				p.Fitxatu("sarrera");
+			}
+		});
+		btnFitxatuS.setBounds(296, 10, 120, 20);
+		panelMenuInfor.add(btnFitxatuS);
+		
+		JButton btnFitxatuI = new JButton("Fitxatu irteera");
+		btnFitxatuI.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				p.Fitxatu("irteera");
+			}
+		});
+		btnFitxatuI.setBounds(296, 42, 120, 20);
+		panelMenuInfor.add(btnFitxatuI);
+		
+		table = new JTable();
+		table.setBounds(10, 10, 276, 184);
+		panelMenuInfor.add(table);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(104, 223, 84, 20);
+		panelMenuInfor.add(btnNewButton);
 		
 		JPanel panelLogin = new JPanel();
 		panelLogin.setBounds(10, 10, 426, 253);
@@ -97,16 +128,20 @@ public class Logina extends JFrame {
 			        
 			        if (rs.next()) {
 		                String rol = rs.getString("kargua");
-		                if(rol.toLowerCase().equals("informatikoa")||rol.toLowerCase().equals("langileburua")||rol.toLowerCase().equals("admin")) {
-		                	Informatikoa i=new Informatikoa(rs.getInt("id"),rs.getString("izena"),rs.getString("abizena"),rs.getString("kargua"),rs.getString("email"),rs.getInt("telefonoa"),rs.getString("pasahitza"));
-		                	i.Login(rol,i);
-		                	panelLogin.setVisible(false);
+		                switch(rol.toLowerCase()) {
+		                case "informatikoa":
+		                	p=new Informatikoa(rs.getInt("id"),rs.getString("izena"),rs.getString("abizena"),rs.getString("kargua"),rs.getString("email"),rs.getInt("telefonoa"),rs.getString("pasahitza"));
 		                	panelMenuInfor.setVisible(true);
+		                case "admin":
+		                	p=new Admin(rs.getInt("id"),rs.getString("izena"),rs.getString("abizena"),rs.getString("kargua"),rs.getString("email"),rs.getInt("telefonoa"),rs.getString("pasahitza"));
+		                case "langileBurua":
+		                	p=new LangileBurua(rs.getInt("id"),rs.getString("izena"),rs.getString("abizena"),rs.getString("kargua"),rs.getString("email"),rs.getInt("telefonoa"),rs.getString("pasahitza"));
 		                }
 		            } else {
 		                System.out.println("Posta edo pasahitza okerra da.");
 		            }
-
+			        panelLogin.setVisible(false);
+			        
 		            rs.close();
 		            ps.close();
 		            conn.close();

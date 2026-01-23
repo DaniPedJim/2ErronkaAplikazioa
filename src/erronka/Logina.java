@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -25,7 +26,9 @@ public class Logina extends JFrame {
 	private JTextField textPasahitza;
 	private JTable table;
 	
-	private Pertsona p;
+	private Admin a;
+	private Informatikoa i;
+	private LangileBurua lb;
 
 	/**
 	 * Launch the application.
@@ -66,28 +69,33 @@ public class Logina extends JFrame {
 		JButton btnFitxatuS = new JButton("Fitxatu sarrera");
 		btnFitxatuS.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				p.Fitxatu("sarrera");
+				i.Fitxatu("sarrera");
 			}
 		});
-		btnFitxatuS.setBounds(296, 10, 120, 20);
+		btnFitxatuS.setBounds(296, 194, 120, 20);
 		panelMenuInfor.add(btnFitxatuS);
 		
 		JButton btnFitxatuI = new JButton("Fitxatu irteera");
 		btnFitxatuI.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				p.Fitxatu("irteera");
+				i.Fitxatu("irteera");
 			}
 		});
-		btnFitxatuI.setBounds(296, 42, 120, 20);
+		btnFitxatuI.setBounds(296, 224, 120, 20);
 		panelMenuInfor.add(btnFitxatuI);
 		
 		table = new JTable();
-		table.setBounds(10, 10, 276, 184);
+		table.setBounds(0, 0, 426, 184);
 		panelMenuInfor.add(table);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(104, 223, 84, 20);
-		panelMenuInfor.add(btnNewButton);
+		JButton btnIkusiInfo = new JButton("Informazioa erakutsi");
+		btnIkusiInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				i.IkusiKonpontzekoProduktuak(table);
+			}
+		});
+		btnIkusiInfo.setBounds(10, 204, 171, 20);
+		panelMenuInfor.add(btnIkusiInfo);
 		
 		JPanel panelLogin = new JPanel();
 		panelLogin.setBounds(10, 10, 426, 253);
@@ -130,12 +138,12 @@ public class Logina extends JFrame {
 		                String rol = rs.getString("kargua");
 		                switch(rol.toLowerCase()) {
 		                case "informatikoa":
-		                	p=new Informatikoa(rs.getInt("id"),rs.getString("izena"),rs.getString("abizena"),rs.getString("kargua"),rs.getString("email"),rs.getInt("telefonoa"),rs.getString("pasahitza"));
+		                	i=new Informatikoa(rs.getInt("id"),rs.getString("izena"),rs.getString("abizena"),rs.getString("kargua"),rs.getString("email"),rs.getInt("telefonoa"),rs.getString("pasahitza"));
 		                	panelMenuInfor.setVisible(true);
 		                case "admin":
-		                	p=new Admin(rs.getInt("id"),rs.getString("izena"),rs.getString("abizena"),rs.getString("kargua"),rs.getString("email"),rs.getInt("telefonoa"),rs.getString("pasahitza"));
+		                	a=new Admin(rs.getInt("id"),rs.getString("izena"),rs.getString("abizena"),rs.getString("kargua"),rs.getString("email"),rs.getInt("telefonoa"),rs.getString("pasahitza"));
 		                case "langileBurua":
-		                	p=new LangileBurua(rs.getInt("id"),rs.getString("izena"),rs.getString("abizena"),rs.getString("kargua"),rs.getString("email"),rs.getInt("telefonoa"),rs.getString("pasahitza"));
+		                	lb=new LangileBurua(rs.getInt("id"),rs.getString("izena"),rs.getString("abizena"),rs.getString("kargua"),rs.getString("email"),rs.getInt("telefonoa"),rs.getString("pasahitza"));
 		                }
 		            } else {
 		                System.out.println("Posta edo pasahitza okerra da.");

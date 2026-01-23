@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+
 public class Informatikoa extends LangileOrokorra{
 	//Konstruktorea
 	public Informatikoa(int id,String ize,String abi,String kar,String ema,int tel,String pas) {
@@ -14,35 +18,54 @@ public class Informatikoa extends LangileOrokorra{
 	//PROBISIONAL
 	public Informatikoa() {};
 	//Metodoak
-	public void IkusiKonpontzekoProduktuak() {
+	public void IkusiKonpontzekoProduktuak(JTable table) {
 		try (Connection conn = DatabaseConnection.getConnection()) {
-            if (conn == null) {
-                System.out.println("❌ Ezin izan da konektatu datu-basera.");
-                return;
-            }
             // === PRODUKTUAK SALTZEKO EGOERA = 0 (Ez salgai) ===
-            System.out.println("\n=== SALGAI EZ DAUDEN PRODUKTUAK ===");
-            String sqlEzSalgai = "SELECT izena, mota, prezioa, kantitatea, egoera, deskribapena, saltzeko_egoera, konponketa FROM produktuak WHERE saltzeko_egoera = 0";
-            PreparedStatement psEzSalgai = conn.prepareStatement(sqlEzSalgai);
-            ResultSet rsEzSalgai = psEzSalgai.executeQuery();
+            String sql = "SELECT izena, mota, kantitatea, egoera, saltzeko_egoera, konponketa FROM produktuak WHERE saltzeko_egoera = 0";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
             //Lortu produktuak
-            boolean aurkituta = false;
-            while (rsEzSalgai.next()) {
-            	Produktua p=new Produktua(rsEzSalgai.getString("izena"),rsEzSalgai.getString("mota"),rsEzSalgai.getDouble("prezioa"),rsEzSalgai.getInt("kantitatea"),
-            			rsEzSalgai.getString("egoera"),rsEzSalgai.getString("deskribapena"),rsEzSalgai.getBoolean("saltzeko_egoera"),rsEzSalgai.getString("konponketa"));
-                aurkituta = true;
-                System.out.println();
-                System.out.println("Izena: " + p.getIzena());
-                System.out.println("Mota: " + p.getMota());
-                System.out.println("Prezioa: " + p.getPrezioa() + " €");
-                System.out.println("Egoera: " + p.getEgoera());
-                System.out.println("Deskribapena: " + p.getDeskribapena());
-            }
+            DefaultTableModel model = new DefaultTableModel();
+			model.addColumn("izena");
+			model.addColumn("mota");
+			model.addColumn("kantitatea");
+			model.addColumn("egoera");
+			model.addColumn("saltzeko_egoera");
+			model.addColumn("konponketa");
+			
+			table.setModel(model);
+			table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-            if (!aurkituta) {
-                System.out.println("Ez dago produktu ez-salgairik.");
-            }
-            System.out.println();
+			TableColumnModel cm = table.getColumnModel();
+			cm.getColumn(0).setPreferredWidth(150);
+			cm.getColumn(1).setPreferredWidth(150);
+			cm.getColumn(2).setPreferredWidth(90);
+			cm.getColumn(3).setPreferredWidth(110);
+			cm.getColumn(4).setPreferredWidth(90);
+			cm.getColumn(5).setPreferredWidth(120);
+			String[] array=new String[6];
+			
+			array[0]="Izena";
+			array[1]="Mota";
+			array[2]="Kopurua";
+			array[3]="Egoera";
+			array[4]="SEgoera";
+			array[5]="Konponketa";
+			model.addRow(array);
+			
+			try {
+				while(rs.next()) {
+					array[0]=rs.getString(1);
+					array[1]=rs.getString(2);
+					array[2]=rs.getString(3);
+					array[3]=rs.getString(4);
+					array[4]=rs.getString(5);
+					array[5]=rs.getString(6);
+					model.addRow(array);
+				}
+			}catch(SQLException e1) {
+				e1.printStackTrace();
+			}
 		}catch (SQLException e) {
             System.out.println(" Errorea datu-basearekin: " + e.getMessage());
         }

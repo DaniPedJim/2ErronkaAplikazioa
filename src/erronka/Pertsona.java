@@ -29,10 +29,6 @@ public abstract class Pertsona {
 	//Metodoak
 	public void Fitxatu(String mota) {
         try (Connection conn = DatabaseConnection.getConnection()) {
-            if (conn == null) {
-                System.out.println("Ezin da konektatu datu-basera.");
-                return;
-            }
             String sql = "INSERT INTO fitxaketak (langile_id, data, mota, ordua) VALUES (?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, this.id);

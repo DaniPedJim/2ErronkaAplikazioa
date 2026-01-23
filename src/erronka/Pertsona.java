@@ -17,6 +17,7 @@ public abstract class Pertsona {
 	private int telefonoa;
 	private String pasahitza;
 	//Konstruktorea
+	public Pertsona() {};
 	public Pertsona(int id,String ize,String abi,String kar,String ema,int tel,String pas) {
 		this.id=id;
 		this.izena=ize;

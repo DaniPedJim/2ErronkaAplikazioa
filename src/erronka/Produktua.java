@@ -1,9 +1,5 @@
 package erronka;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
 public class Produktua {
 	private int id;
 	private String izena;
@@ -14,8 +10,9 @@ public class Produktua {
 	private String deskribapena;
 	private boolean saltzekoEgoera;
 	private String konponketa;
+	private String argazkia;
 	
-	public Produktua(String ize,String mot,double pre,int kan,String ego,String des,boolean sal,String kon) {
+	public Produktua(String ize,String mot,double pre,int kan,String ego,String des,boolean sal,String kon,String arg) {
 		this.izena=ize;
 		this.mota=mot;
 		this.prezioa=pre;
@@ -24,32 +21,9 @@ public class Produktua {
 		this.deskribapena=des;
 		this.saltzekoEgoera=sal;
 		this.konponketa=kon;
+		this.argazkia=arg;
 	}
-
-	public static boolean gehitu(Produktua p) {
-		String sqlInsert = "INSERT INTO produktuak (izena, mota, prezioa, kantitatea, egoera, deskribapena, saltzeko_egoera, konponketa) "
-	                         + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-
-	        try (Connection conn = DatabaseConnection.getConnection();
-	             PreparedStatement ps = conn.prepareStatement(sqlInsert)) {
-
-	            ps.setString(1, p.getIzena());
-	            ps.setString(2, p.getMota());
-	            ps.setDouble(3, p.getPrezioa());
-	            ps.setInt(4, p.getKantitatea());
-	            ps.setString(5, p.getEgoera());
-	            ps.setString(6, p.getDeskribapena());
-	            ps.setBoolean(7, p.isSaltzekoEgoera());
-	            ps.setString(8, p.getKonponketa().isEmpty() ? null : p.getKonponketa());
-
-	            int emaitza = ps.executeUpdate();
-	            return emaitza > 0;
-
-	        } catch (SQLException e) {
-	            System.out.println("Errorea datu-basearekin: " + e.getMessage());
-	            return false;
-	}    
-}
+	
 	public int getId() {
 		return id;
 	}
@@ -103,5 +77,11 @@ public class Produktua {
 	}
 	public void setKonponketa(String konponketa) {
 		this.konponketa = konponketa;
+	}
+	public String getArgazkia() {
+		return argazkia;
+	}
+	public void setArgazkia(String argazkia) {
+		this.argazkia = argazkia;
 	}
 }

@@ -1,51 +1,39 @@
 package erronka;
 
-import java.util.Scanner;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public abstract class LangileOrokorra extends Pertsona {
 	//Konstruktorea
+	public LangileOrokorra() {};
 	public LangileOrokorra(int id,String ize,String abi,String kar,String ema,int tel,String pas) {
 		super(id,ize,abi,kar,ema,tel,pas);
 	}
 	//Metodoak	
-	public void EkipoakErregistratu() {
-		Scanner sc = new Scanner(System.in);
+	public boolean gehitu(Produktua p) {
+		String sqlInsert = "INSERT INTO produktuak (izena, mota, prezioa, kantitatea, egoera, deskribapena, saltzeko_egoera, konponketa,argazkia) "
+	                         + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        System.out.println("=== PRODUKTU BERRIA GEHITU ===");
+	        try (Connection conn = DatabaseConnection.getConnection();
+	             PreparedStatement ps = conn.prepareStatement(sqlInsert)) {
 
-        System.out.print("Produktuaren izena: ");
-        String izena = sc.nextLine();
+	            ps.setString(1, p.getIzena());
+	            ps.setString(2, p.getMota());
+	            ps.setDouble(3, p.getPrezioa());
+	            ps.setInt(4, p.getKantitatea());
+	            ps.setString(5, p.getEgoera());
+	            ps.setString(6, p.getDeskribapena());
+	            ps.setBoolean(7, p.isSaltzekoEgoera());
+	            ps.setString(8, p.getKonponketa());
+	            ps.setString(9, p.getArgazkia());
 
-        System.out.print("Produktuaren mota (Ordenagailua, Mugikorra, Konponenta...): ");
-        String mota = sc.nextLine();
+	            int emaitza = ps.executeUpdate();
+	            return emaitza > 0;
 
-        System.out.print("Prezioa (€): ");
-        double prezioa = sc.nextDouble();
-        sc.nextLine();
-
-        System.out.print("Kantitatea: ");
-        int kantitatea = sc.nextInt();
-        sc.nextLine();
-
-        System.out.print("Egoera (Lehen eskua / Bigarren eskua): ");
-        String egoera = sc.nextLine();
-
-        System.out.print("Deskribapena: ");
-        String deskribapena = sc.nextLine();
-
-        System.out.print("Saltzeko egoera (True = Salgai - False = Ez salgai): ");
-        boolean saltzekoEgoera = sc.nextBoolean();
-        sc.nextLine();
-
-        System.out.print("Konponketa egoera (adib. 'Konponduta', 'Konpontzen', 'Zain' edo hutsik): ");
-        String konponketa = sc.nextLine();
-
-        Produktua p = new Produktua(izena, mota, prezioa, kantitatea, egoera, deskribapena, saltzekoEgoera, konponketa);
-
-        if (Produktua.gehitu(p) == true) {
-            System.out.println("✅ Produktua ondo gehitu da datu-basera!");
-        } else {
-            System.out.println("❌ Errorea gertatu da produktua gehitzean.");
-        }
-    }
+	        } catch (SQLException e) {
+	            System.out.println("Errorea datu-basearekin: " + e.getMessage());
+	            return false;
+	}    
+}
 }

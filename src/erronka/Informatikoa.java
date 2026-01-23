@@ -15,6 +15,8 @@ public class Informatikoa extends LangileOrokorra{
 	public Informatikoa(int id,String ize,String abi,String kar,String ema,int tel,String pas) {
 		super(id,ize,abi,kar,ema,tel,pas);
 	}
+	//PROBISIONAL
+	public Informatikoa() {};
 	//Metodoak
 	public void IkusiKonpontzekoProduktuak(JTable table,Connection conn) {
 			String sql = "select * from produktuak where saltzeko_egoera=0";

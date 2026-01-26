@@ -24,20 +24,20 @@ public class Logina extends JFrame {
 	private JTextField textErabiltzailea;
 	private JTextField textPasahitza;
 	
-	private Admin a;
+	private Admin a=new Admin();
 	private Informatikoa i=new Informatikoa();
-	private LangileBurua lb;
-	private JTable table;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
+	private LangileBurua lb=new LangileBurua();
+	private JTable tableInformatikoa;
+	private JTextField textMota;
+	private JTextField textKantitatea;
+	private JTextField textDeskribapena;
+	private JTextField textKonponketa;
+	private JTextField textIzena;
+	private JTextField textPrezioa;
+	private JTextField textEgoera;
+	private JTextField textSaltzekoEgoera;
+	private JTextField textArgazkia;
+	private JTextField textAldatuSaltzekoEgoera;
 
 	/**
 	 * Launch the application.
@@ -75,17 +75,27 @@ public class Logina extends JFrame {
 		panelMenuInfor.setBounds(0, 0, 576, 252);
 		contentPane.add(panelMenuInfor);
 		
-		table = new JTable();
-		table.setBounds(0, 0, 366, 184);
-		panelMenuInfor.add(table);
+		tableInformatikoa = new JTable();
+		tableInformatikoa.setBounds(0, 0, 366, 184);
+		panelMenuInfor.add(tableInformatikoa);
 		
-		i.IkusiKonpontzekoProduktuak(table, conn);
+		i.IkusiKonpontzekoProduktuak(tableInformatikoa, conn);
 		
 		JButton btnFitxatuS = new JButton("Fitxatu sarrera");
+		btnFitxatuS.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				i.Fitxatu("sarrera");
+			}
+		});
 		btnFitxatuS.setBounds(10, 194, 120, 20);
 		panelMenuInfor.add(btnFitxatuS);
 		
 		JButton btnFitxatuI = new JButton("Fitxatu irteera");
+		btnFitxatuI.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				i.Fitxatu("irteera");
+			}
+		});
 		btnFitxatuI.setBounds(10, 224, 120, 20);
 		panelMenuInfor.add(btnFitxatuI);
 		
@@ -98,93 +108,104 @@ public class Logina extends JFrame {
 		lblMota.setBounds(476, 22, 90, 12);
 		panelMenuInfor.add(lblMota);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(476, 45, 90, 18);
-		panelMenuInfor.add(textField);
+		textMota = new JTextField();
+		textMota.setColumns(10);
+		textMota.setBounds(476, 45, 90, 18);
+		panelMenuInfor.add(textMota);
 		
 		JLabel lblKantitatea = new JLabel("Kantitatea:");
 		lblKantitatea.setBounds(476, 72, 90, 12);
 		panelMenuInfor.add(lblKantitatea);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(476, 94, 90, 18);
-		panelMenuInfor.add(textField_1);
+		textKantitatea = new JTextField();
+		textKantitatea.setColumns(10);
+		textKantitatea.setBounds(476, 94, 90, 18);
+		panelMenuInfor.add(textKantitatea);
 		
 		JLabel lblDeskribapena = new JLabel("Deskribapena:");
 		lblDeskribapena.setBounds(476, 122, 90, 12);
 		panelMenuInfor.add(lblDeskribapena);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(476, 144, 90, 18);
-		panelMenuInfor.add(textField_2);
+		textDeskribapena = new JTextField();
+		textDeskribapena.setColumns(10);
+		textDeskribapena.setBounds(476, 144, 90, 18);
+		panelMenuInfor.add(textDeskribapena);
 		
 		JLabel lblKonponketa = new JLabel("Konponketa:");
 		lblKonponketa.setBounds(476, 173, 90, 12);
 		panelMenuInfor.add(lblKonponketa);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(476, 195, 90, 18);
-		panelMenuInfor.add(textField_3);
+		textKonponketa = new JTextField();
+		textKonponketa.setColumns(10);
+		textKonponketa.setBounds(476, 195, 90, 18);
+		panelMenuInfor.add(textKonponketa);
 		
 		JLabel lblIzena = new JLabel("Izena:");
 		lblIzena.setBounds(376, 22, 90, 12);
 		panelMenuInfor.add(lblIzena);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(376, 45, 90, 18);
-		panelMenuInfor.add(textField_4);
+		textIzena = new JTextField();
+		textIzena.setColumns(10);
+		textIzena.setBounds(376, 45, 90, 18);
+		panelMenuInfor.add(textIzena);
 		
 		JLabel lblPrezioa = new JLabel("Prezioa:");
 		lblPrezioa.setBounds(376, 72, 90, 12);
 		panelMenuInfor.add(lblPrezioa);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(376, 94, 90, 18);
-		panelMenuInfor.add(textField_5);
+		textPrezioa = new JTextField();
+		textPrezioa.setColumns(10);
+		textPrezioa.setBounds(376, 94, 90, 18);
+		panelMenuInfor.add(textPrezioa);
 		
 		JLabel lblEgoera = new JLabel("Egoera:");
 		lblEgoera.setBounds(376, 122, 90, 12);
 		panelMenuInfor.add(lblEgoera);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(376, 144, 90, 18);
-		panelMenuInfor.add(textField_6);
+		textEgoera = new JTextField();
+		textEgoera.setColumns(10);
+		textEgoera.setBounds(376, 144, 90, 18);
+		panelMenuInfor.add(textEgoera);
 		
 		JLabel lblSaltzeko_egoera = new JLabel("Saltzeko egoera:");
 		lblSaltzeko_egoera.setBounds(376, 173, 90, 12);
 		panelMenuInfor.add(lblSaltzeko_egoera);
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(376, 195, 90, 18);
-		panelMenuInfor.add(textField_7);
+		textSaltzekoEgoera = new JTextField();
+		textSaltzekoEgoera.setColumns(10);
+		textSaltzekoEgoera.setBounds(376, 195, 90, 18);
+		panelMenuInfor.add(textSaltzekoEgoera);
 		
 		JLabel lblArgazkia = new JLabel("Argazkia:");
 		lblArgazkia.setBounds(376, 213, 90, 12);
 		panelMenuInfor.add(lblArgazkia);
 		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(376, 235, 90, 18);
-		panelMenuInfor.add(textField_8);
+		textArgazkia = new JTextField();
+		textArgazkia.setColumns(10);
+		textArgazkia.setBounds(376, 235, 90, 18);
+		panelMenuInfor.add(textArgazkia);
 		
 		JButton btnGehitu = new JButton("Gehitu");
+		btnGehitu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Produktua p=new Produktua(textIzena.getText(),textMota.getText(),Double.parseDouble(textPrezioa.getText()),Integer.parseInt(textKantitatea.getText()),textEgoera.getText(),textDeskribapena.getText(),Boolean.parseBoolean(textSaltzekoEgoera.getText()),textKonponketa.getText(),textArgazkia.getText());
+				i.gehitu(p);
+			}
+		});
 		btnGehitu.setBounds(476, 224, 90, 20);
 		panelMenuInfor.add(btnGehitu);
 		
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
-		textField_9.setBounds(156, 210, 29, 18);
-		panelMenuInfor.add(textField_9);
+		textAldatuSaltzekoEgoera = new JTextField();
+		textAldatuSaltzekoEgoera.setColumns(10);
+		textAldatuSaltzekoEgoera.setBounds(156, 210, 29, 18);
+		panelMenuInfor.add(textAldatuSaltzekoEgoera);
 		
 		JButton btnSaltzekoEgoeraAldatu = new JButton("Saltzeko egoera aldatu");
+		btnSaltzekoEgoeraAldatu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				i.KonponketaAldatu(Integer.parseInt(textAldatuSaltzekoEgoera.getText()), conn);
+			}
+		});
 		btnSaltzekoEgoeraAldatu.setBounds(206, 209, 148, 20);
 		panelMenuInfor.add(btnSaltzekoEgoeraAldatu);
 		
@@ -197,10 +218,6 @@ public class Logina extends JFrame {
 		separator_5.setOrientation(SwingConstants.VERTICAL);
 		separator_5.setBounds(364, 178, 12, 75);
 		panelMenuInfor.add(separator_5);
-		
-		
-		
-		
 		
 		JPanel panelLogin = new JPanel();
 		panelLogin.setBounds(103, 10, 426, 253);

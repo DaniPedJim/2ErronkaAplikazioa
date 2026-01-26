@@ -15,8 +15,6 @@ public class Informatikoa extends LangileOrokorra{
 	public Informatikoa(int id,String ize,String abi,String kar,String ema,int tel,String pas) {
 		super(id,ize,abi,kar,ema,tel,pas);
 	}
-	//PROBISIONAL
-	public Informatikoa() {};
 	//Metodoak
 	public void IkusiKonpontzekoProduktuak(JTable table,Connection conn) {
 			String sql = "select * from produktuak where saltzeko_egoera=0";
@@ -54,7 +52,7 @@ public class Informatikoa extends LangileOrokorra{
 			}
 			
 		}
-	public void KonponketaAldatu(int produktua,Connection conn) {
+	public void KonponketaAldatu(int produktuId,Connection conn) {
 		String sql = "select id from produktuak where saltzeko_egoera=0";
 		Statement st;
 		ResultSet rs;
@@ -63,7 +61,7 @@ public class Informatikoa extends LangileOrokorra{
 			st=conn.createStatement();
 			rs=st.executeQuery(sql);
 			while(rs.next()) {
-				if(id==produktua) {
+				if(id==produktuId) {
 					sql="update produktuak set saltzeko_egoera=1 and egoera='Konponduta' where id=?";
 					PreparedStatement ps = conn.prepareStatement(sql);
 					ps.setInt(1, rs.getInt(1));

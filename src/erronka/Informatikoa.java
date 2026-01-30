@@ -12,12 +12,15 @@ import javax.swing.table.DefaultTableModel;
 public class Informatikoa extends LangileOrokorra{
 	//Konstruktorea
 	public Informatikoa() {};
+	public Informatikoa(String ize,String abi,String kar,String ema,int tel,String pas) {
+		super(ize,abi,kar,ema,tel,pas);
+	}
 	public Informatikoa(int id,String ize,String abi,String kar,String ema,int tel,String pas) {
 		super(id,ize,abi,kar,ema,tel,pas);
 	}
 	//Metodoak
 	public void IkusiKonpontzekoProduktuak(JTable table,Connection conn) {
-			String sql = "select * from produktuak where saltzeko_egoera=0";
+			String sql = "select * from produktuak where egoera like 'Ez ikusgai'";
 			Statement st;
 			ResultSet rs;
 			int id=1;
@@ -34,17 +37,17 @@ public class Informatikoa extends LangileOrokorra{
 			array[0]="ID";
 			array[1]="IZENA";
 			array[2]="MOTA";
-			array[3]="EGOERA";
+			array[3]="KATEGORIA";
 			model.addRow(array);
 			try {
 				st=conn.createStatement();
 				rs=st.executeQuery(sql);
 				while(rs.next()) {
-					Produktua p=new Produktua(rs.getString(2),rs.getString(3),rs.getDouble(4),rs.getInt(5),rs.getString(6),rs.getString(7),rs.getBoolean(8),rs.getString(9),rs.getString(10));
+					Produktua p=new Produktua(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getDouble(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getInt(10));
 					array[0]=Integer.toString(id++);
 					array[1]=p.getIzena();
 					array[2]=p.getMota();
-					array[3]=p.getEgoera();
+					array[3]=p.getKategoria();
 					model.addRow(array);
 				}
 			}catch(SQLException e1) {
@@ -53,7 +56,7 @@ public class Informatikoa extends LangileOrokorra{
 			
 		}
 	public void KonponketaAldatu(int produktuId,Connection conn) {
-		String sql = "select id from produktuak where saltzeko_egoera=0";
+		String sql = "select id from produktuak where egoera like 'Ez ikusgai'";
 		Statement st;
 		ResultSet rs;
 		int id=1;
@@ -62,7 +65,7 @@ public class Informatikoa extends LangileOrokorra{
 			rs=st.executeQuery(sql);
 			while(rs.next()) {
 				if(id==produktuId) {
-					sql="update produktuak set saltzeko_egoera=1 and egoera='Konponduta' where id=?";
+					sql="update produktuak set egoera='Ikusgai' where id=?";
 					PreparedStatement ps = conn.prepareStatement(sql);
 					ps.setInt(1, rs.getInt(1));
 					ps.executeUpdate();

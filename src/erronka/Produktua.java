@@ -3,27 +3,26 @@ package erronka;
 public class Produktua {
 	private int id;
 	private String izena;
+	private String kategoria;
 	private String mota;
+	private String modeloa;
 	private double prezioa;
-	private int kantitatea;
+	private String konektibitatea;
+	private String irudia;
 	private String egoera;
-	private String deskribapena;
-	private boolean saltzekoEgoera;
-	private String konponketa;
-	private String argazkia;
+	private int stock;
 	
-	public Produktua(String ize,String mot,double pre,int kan,String ego,String des,boolean sal,String kon,String arg) {
+	public Produktua(String ize,String kat,String mot,String mod,double pre,String kon,String iru,String ego,int sto) {
 		this.izena=ize;
+		this.kategoria=kat;
 		this.mota=mot;
+		this.modeloa=mod;
 		this.prezioa=pre;
-		this.kantitatea=kan;
+		this.konektibitatea=kon;
+		this.irudia=iru;
 		this.egoera=ego;
-		this.deskribapena=des;
-		this.saltzekoEgoera=sal;
-		this.konponketa=kon;
-		this.argazkia=arg;
+		this.stock=sto;
 	}
-	
 	public int getId() {
 		return id;
 	}
@@ -36,11 +35,23 @@ public class Produktua {
 	public void setIzena(String izena) {
 		this.izena = izena;
 	}
+	public String getKategoria() {
+		return kategoria;
+	}
+	public void setKategoria(String kategoria) {
+		this.kategoria = kategoria;
+	}
 	public String getMota() {
 		return mota;
 	}
 	public void setMota(String mota) {
 		this.mota = mota;
+	}
+	public String getModeloa() {
+		return modeloa;
+	}
+	public void setModeloa(String modeloa) {
+		this.modeloa = modeloa;
 	}
 	public double getPrezioa() {
 		return prezioa;
@@ -48,11 +59,17 @@ public class Produktua {
 	public void setPrezioa(double prezioa) {
 		this.prezioa = prezioa;
 	}
-	public int getKantitatea() {
-		return kantitatea;
+	public String getKonektibitatea() {
+		return konektibitatea;
 	}
-	public void setKantitatea(int kantitatea) {
-		this.kantitatea = kantitatea;
+	public void setKonektibitatea(String konektibitatea) {
+		this.konektibitatea = konektibitatea;
+	}
+	public String getIrudia() {
+		return irudia;
+	}
+	public void setIrudia(String irudia) {
+		this.irudia = irudia;
 	}
 	public String getEgoera() {
 		return egoera;
@@ -60,28 +77,10 @@ public class Produktua {
 	public void setEgoera(String egoera) {
 		this.egoera = egoera;
 	}
-	public String getDeskribapena() {
-		return deskribapena;
+	public int getStock() {
+		return stock;
 	}
-	public void setDeskribapena(String deskribapena) {
-		this.deskribapena = deskribapena;
-	}
-	public boolean isSaltzekoEgoera() {
-		return saltzekoEgoera;
-	}
-	public void setSaltzekoEgoera(boolean saltzeko_egoera) {
-		this.saltzekoEgoera = saltzeko_egoera;
-	}
-	public String getKonponketa() {
-		return konponketa;
-	}
-	public void setKonponketa(String konponketa) {
-		this.konponketa = konponketa;
-	}
-	public String getArgazkia() {
-		return argazkia;
-	}
-	public void setArgazkia(String argazkia) {
-		this.argazkia = argazkia;
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 }

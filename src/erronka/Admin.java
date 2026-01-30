@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -39,7 +38,7 @@ public class Admin extends Pertsona {
 			st=conn.createStatement();
 			rs=st.executeQuery(sql);
 			while(rs.next()) {
-				bezeroak b=new bezeroak(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9));
+				Bezeroak b=new Bezeroak(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9));
 				array[0]=Integer.toString(b.getId());
 				array[1]=b.getIzena();
 				array[2]=b.getIritzia();
@@ -74,8 +73,8 @@ public class Admin extends Pertsona {
 			st=conn.createStatement();
 			rs=st.executeQuery(sql);
 			while(rs.next()) {
-				Erosketak e=new Erosketak(rs.getInt(1),rs.getDate(2),rs.getDate(3));
-				array[0]=Integer.toString(e.getId());
+				Erosketak e=new Erosketak(rs.getString(1),rs.getDate(2),rs.getDate(3));
+				array[0]=e.getIzena();
 				array[1]=sdf.format(e.getBidalketa_data());
 				array[2]=sdf.format(e.getData());
 				model.addRow(array);
@@ -149,10 +148,10 @@ public class Admin extends Pertsona {
 			st=conn.createStatement();
 			rs=st.executeQuery(sql);
 			while(rs.next()) {
-				Produktua p=new Produktua(rs.getString(1),rs.getString(2),rs.getDouble(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getBoolean(7),rs.getString(8),rs.getString(9));
+				Produktua p=new Produktua(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getDouble(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getInt(10));
 				array[0]=p.getIzena();
 				array[1]=p.getMota();
-				array[2]=Integer.toString(p.getKantitatea());
+				array[2]=Integer.toString(p.getStock());
 				model.addRow(array);
 			}
 		}catch(SQLException e1) {
@@ -181,7 +180,7 @@ public class Admin extends Pertsona {
 			st=conn.createStatement();
 			rs=st.executeQuery(sql);
 			while(rs.next()) {
-				bezeroak b=new bezeroak(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9));
+				Bezeroak b=new Bezeroak(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9));
 				array[0]=Integer.toString(b.getId());
 				array[1]=b.getIzena();
 				array[2]=b.getAbizena();

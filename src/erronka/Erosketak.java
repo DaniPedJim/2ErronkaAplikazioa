@@ -3,21 +3,21 @@ package erronka;
 import java.sql.Date;
 
 public class Erosketak {
-	private int id;
+	private String izena;
 	private Date bidalketa_data;
 	private Date data;
 	//Konstruktorea
-	public Erosketak(int id,Date bidalketaData,Date data) {
-		this.id=id;
+	public Erosketak(String izena,Date bidalketaData,Date data) {
+		this.izena=izena;
 		this.bidalketa_data=bidalketaData;
 		this.data=data;
 	}
 	//Getter eta setter
-	public int getId() {
-		return id;
+	public String getIzena() {
+		return izena;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setIzena(String izena) {
+		this.izena = izena;
 	}
 	public Date getBidalketa_data() {
 		return bidalketa_data;

@@ -1,6 +1,6 @@
 package erronka;
 
-public class bezeroak {
+public class Bezeroak {
 	private int id;
 	private String izena;
 	private String abizena;
@@ -11,7 +11,7 @@ public class bezeroak {
 	private String rol;
 	private String iritzia;
 	//Konstruktorea
-	public bezeroak(int id, String ize, String abi, String ema, int tel, String pas, String hel, String rol, String iri) {
+	public Bezeroak(int id, String ize, String abi, String ema, int tel, String pas, String hel, String rol, String iri) {
 		this.id=id;
 		this.izena=ize;
 		this.abizena=abi;

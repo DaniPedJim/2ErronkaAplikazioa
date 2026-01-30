@@ -16,6 +16,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.JTable;
+import javax.swing.JToggleButton;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class Logina extends JFrame {
 
@@ -28,16 +31,31 @@ public class Logina extends JFrame {
 	private Informatikoa i=new Informatikoa();
 	private LangileBurua lb=new LangileBurua();
 	private JTable tableInformatikoa;
-	private JTextField textMota;
-	private JTextField textKantitatea;
-	private JTextField textDeskribapena;
-	private JTextField textKonponketa;
-	private JTextField textIzena;
-	private JTextField textPrezioa;
-	private JTextField textEgoera;
-	private JTextField textSaltzekoEgoera;
-	private JTextField textArgazkia;
+	private JTextField textMotaInf;
+	private JTextField textStockInf;
+	private JTextField textKategoriaInf;
+	private JTextField textKonektibitateaInf;
+	private JTextField textIzenaInf;
+	private JTextField textPrezioaInf;
+	private JTextField textModeloaInf;
+	private JTextField textArgazkiaInf;
 	private JTextField textAldatuSaltzekoEgoera;
+	private JTable tableLangileBurua;
+	private JTextField textIzenaLB;
+	private JTextField textMotaLB;
+	private JTextField textPrezioaLB;
+	private JTextField textKategoriaLB;
+	private JTextField textModeloaLB;
+	private JTextField textKonektibitateaLB;
+	private JTextField textStockLB;
+	private JTextField textArgazkiaLB;
+	private JTextField textProduktuIdLB;
+	private JTextField textIzenaLangile;
+	private JTextField textAbizenaLangile;
+	private JTextField textTelefonoaLangile;
+	private JTextField textEmailLangile;
+	private JTextField textPrezioaAldatu;
+	private JTextField textPasahitzaLangile;
 
 	/**
 	 * Launch the application.
@@ -69,9 +87,15 @@ public class Logina extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		
+		/*
+							MENU INFORMATIKOA
+		*/
+		
+		
 		JPanel panelMenuInfor = new JPanel();
-		panelMenuInfor.setLayout(null);
 		panelMenuInfor.setVisible(false);
+		panelMenuInfor.setLayout(null);
 		panelMenuInfor.setBounds(0, 0, 576, 252);
 		contentPane.add(panelMenuInfor);
 		
@@ -104,103 +128,107 @@ public class Logina extends JFrame {
 		lblGehituProd.setBounds(397, 0, 140, 12);
 		panelMenuInfor.add(lblGehituProd);
 		
-		JLabel lblMota = new JLabel("Mota:");
-		lblMota.setBounds(476, 22, 90, 12);
-		panelMenuInfor.add(lblMota);
+		JLabel lblMotaInf = new JLabel("Mota:");
+		lblMotaInf.setBounds(476, 22, 90, 12);
+		panelMenuInfor.add(lblMotaInf);
 		
-		textMota = new JTextField();
-		textMota.setColumns(10);
-		textMota.setBounds(476, 45, 90, 18);
-		panelMenuInfor.add(textMota);
+		textMotaInf = new JTextField();
+		textMotaInf.setColumns(10);
+		textMotaInf.setBounds(476, 45, 90, 18);
+		panelMenuInfor.add(textMotaInf);
 		
-		JLabel lblKantitatea = new JLabel("Kantitatea:");
-		lblKantitatea.setBounds(476, 72, 90, 12);
-		panelMenuInfor.add(lblKantitatea);
+		JLabel lblStockInf = new JLabel("Stock:");
+		lblStockInf.setBounds(476, 72, 90, 12);
+		panelMenuInfor.add(lblStockInf);
 		
-		textKantitatea = new JTextField();
-		textKantitatea.setColumns(10);
-		textKantitatea.setBounds(476, 94, 90, 18);
-		panelMenuInfor.add(textKantitatea);
+		textStockInf = new JTextField();
+		textStockInf.setColumns(10);
+		textStockInf.setBounds(476, 94, 90, 18);
+		panelMenuInfor.add(textStockInf);
 		
-		JLabel lblDeskribapena = new JLabel("Deskribapena:");
-		lblDeskribapena.setBounds(476, 122, 90, 12);
-		panelMenuInfor.add(lblDeskribapena);
+		JLabel lblKategoriaInf = new JLabel("Kategoria:");
+		lblKategoriaInf.setBounds(476, 122, 90, 12);
+		panelMenuInfor.add(lblKategoriaInf);
 		
-		textDeskribapena = new JTextField();
-		textDeskribapena.setColumns(10);
-		textDeskribapena.setBounds(476, 144, 90, 18);
-		panelMenuInfor.add(textDeskribapena);
+		textKategoriaInf = new JTextField();
+		textKategoriaInf.setColumns(10);
+		textKategoriaInf.setBounds(476, 144, 90, 18);
+		panelMenuInfor.add(textKategoriaInf);
 		
-		JLabel lblKonponketa = new JLabel("Konponketa:");
-		lblKonponketa.setBounds(476, 173, 90, 12);
-		panelMenuInfor.add(lblKonponketa);
+		JLabel lblKonektibitateaInf = new JLabel("Konektibitatea:");
+		lblKonektibitateaInf.setBounds(476, 173, 90, 12);
+		panelMenuInfor.add(lblKonektibitateaInf);
 		
-		textKonponketa = new JTextField();
-		textKonponketa.setColumns(10);
-		textKonponketa.setBounds(476, 195, 90, 18);
-		panelMenuInfor.add(textKonponketa);
+		textKonektibitateaInf = new JTextField();
+		textKonektibitateaInf.setColumns(10);
+		textKonektibitateaInf.setBounds(476, 195, 90, 18);
+		panelMenuInfor.add(textKonektibitateaInf);
 		
-		JLabel lblIzena = new JLabel("Izena:");
-		lblIzena.setBounds(376, 22, 90, 12);
-		panelMenuInfor.add(lblIzena);
+		JLabel lblIzenaInf = new JLabel("Izena:");
+		lblIzenaInf.setBounds(376, 22, 90, 12);
+		panelMenuInfor.add(lblIzenaInf);
 		
-		textIzena = new JTextField();
-		textIzena.setColumns(10);
-		textIzena.setBounds(376, 45, 90, 18);
-		panelMenuInfor.add(textIzena);
+		textIzenaInf = new JTextField();
+		textIzenaInf.setColumns(10);
+		textIzenaInf.setBounds(376, 45, 90, 18);
+		panelMenuInfor.add(textIzenaInf);
 		
-		JLabel lblPrezioa = new JLabel("Prezioa:");
-		lblPrezioa.setBounds(376, 72, 90, 12);
-		panelMenuInfor.add(lblPrezioa);
+		JLabel lblPrezioaInf = new JLabel("Prezioa:");
+		lblPrezioaInf.setBounds(376, 72, 90, 12);
+		panelMenuInfor.add(lblPrezioaInf);
 		
-		textPrezioa = new JTextField();
-		textPrezioa.setColumns(10);
-		textPrezioa.setBounds(376, 94, 90, 18);
-		panelMenuInfor.add(textPrezioa);
+		textPrezioaInf = new JTextField();
+		textPrezioaInf.setColumns(10);
+		textPrezioaInf.setBounds(376, 94, 90, 18);
+		panelMenuInfor.add(textPrezioaInf);
 		
-		JLabel lblEgoera = new JLabel("Egoera:");
-		lblEgoera.setBounds(376, 122, 90, 12);
-		panelMenuInfor.add(lblEgoera);
+		JLabel lblEgoeraInf = new JLabel("Egoera:");
+		lblEgoeraInf.setBounds(376, 122, 90, 12);
+		panelMenuInfor.add(lblEgoeraInf);
 		
-		textEgoera = new JTextField();
-		textEgoera.setColumns(10);
-		textEgoera.setBounds(376, 144, 90, 18);
-		panelMenuInfor.add(textEgoera);
+		JComboBox comboBoxEgoeraInf = new JComboBox();
+		comboBoxEgoeraInf.setModel(new DefaultComboBoxModel(new String[] {"Ez ikusgai", "Ikusgai"}));
+		comboBoxEgoeraInf.setBounds(376, 144, 90, 18);
+		panelMenuInfor.add(comboBoxEgoeraInf);
 		
-		JLabel lblSaltzeko_egoera = new JLabel("Saltzeko egoera:");
-		lblSaltzeko_egoera.setBounds(376, 173, 90, 12);
-		panelMenuInfor.add(lblSaltzeko_egoera);
+		JLabel lblModeloaInf = new JLabel("Modeloa:");
+		lblModeloaInf.setBounds(376, 173, 90, 12);
+		panelMenuInfor.add(lblModeloaInf);
 		
-		textSaltzekoEgoera = new JTextField();
-		textSaltzekoEgoera.setColumns(10);
-		textSaltzekoEgoera.setBounds(376, 195, 90, 18);
-		panelMenuInfor.add(textSaltzekoEgoera);
+		textModeloaInf = new JTextField();
+		textModeloaInf.setColumns(10);
+		textModeloaInf.setBounds(376, 195, 90, 18);
+		panelMenuInfor.add(textModeloaInf);
 		
-		JLabel lblArgazkia = new JLabel("Argazkia:");
-		lblArgazkia.setBounds(376, 213, 90, 12);
-		panelMenuInfor.add(lblArgazkia);
+		JLabel lblArgazkiaInf = new JLabel("Argazkia:");
+		lblArgazkiaInf.setBounds(376, 213, 90, 12);
+		panelMenuInfor.add(lblArgazkiaInf);
 		
-		textArgazkia = new JTextField();
-		textArgazkia.setColumns(10);
-		textArgazkia.setBounds(376, 235, 90, 18);
-		panelMenuInfor.add(textArgazkia);
+		textArgazkiaInf = new JTextField();
+		textArgazkiaInf.setColumns(10);
+		textArgazkiaInf.setBounds(376, 235, 90, 18);
+		panelMenuInfor.add(textArgazkiaInf);
 		
 		JButton btnGehitu = new JButton("Gehitu");
 		btnGehitu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Produktua p=new Produktua(textIzena.getText(),textMota.getText(),Double.parseDouble(textPrezioa.getText()),Integer.parseInt(textKantitatea.getText()),textEgoera.getText(),textDeskribapena.getText(),Boolean.parseBoolean(textSaltzekoEgoera.getText()),textKonponketa.getText(),textArgazkia.getText());
+				Produktua p=new Produktua(textIzenaInf.getText(),textKategoriaInf.getText(),textMotaInf.getText(),textModeloaInf.getText(),Double.parseDouble(textPrezioaInf.getText()),textKonektibitateaInf.getText(),textArgazkiaInf.getText(),(comboBoxEgoeraInf.getSelectedItem()).toString(),Integer.parseInt(textStockInf.getText()));
 				i.gehitu(p);
 			}
 		});
 		btnGehitu.setBounds(476, 224, 90, 20);
 		panelMenuInfor.add(btnGehitu);
 		
+		JLabel lblAldatuSaltzekoEgoera = new JLabel("Saltzeko egoera");
+		lblAldatuSaltzekoEgoera.setBounds(140, 190, 99, 18);
+		panelMenuInfor.add(lblAldatuSaltzekoEgoera);
+		
 		textAldatuSaltzekoEgoera = new JTextField();
 		textAldatuSaltzekoEgoera.setColumns(10);
 		textAldatuSaltzekoEgoera.setBounds(156, 210, 29, 18);
 		panelMenuInfor.add(textAldatuSaltzekoEgoera);
 		
-		JButton btnSaltzekoEgoeraAldatu = new JButton("Saltzeko egoera aldatu");
+		JButton btnSaltzekoEgoeraAldatu = new JButton("Egoera aldatu");
 		btnSaltzekoEgoeraAldatu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				i.KonponketaAldatu(Integer.parseInt(textAldatuSaltzekoEgoera.getText()), conn);
@@ -218,6 +246,12 @@ public class Logina extends JFrame {
 		separator_5.setOrientation(SwingConstants.VERTICAL);
 		separator_5.setBounds(364, 178, 12, 75);
 		panelMenuInfor.add(separator_5);
+		
+		
+		/*
+					MENU LOGIN
+		*/
+		
 		
 		JPanel panelLogin = new JPanel();
 		panelLogin.setBounds(103, 10, 426, 253);
@@ -262,10 +296,13 @@ public class Logina extends JFrame {
 		                case "informatikoa":
 		                	i=new Informatikoa(rs.getInt("id"),rs.getString("izena"),rs.getString("abizena"),rs.getString("kargua"),rs.getString("email"),rs.getInt("telefonoa"),rs.getString("pasahitza"));
 		                	panelMenuInfor.setVisible(true);
+		                	break;
 		                case "admin":
 		                	a=new Admin(rs.getInt("id"),rs.getString("izena"),rs.getString("abizena"),rs.getString("kargua"),rs.getString("email"),rs.getInt("telefonoa"),rs.getString("pasahitza"));
-		                case "langileBurua":
+		                	break;
+		                case "langile burua":
 		                	lb=new LangileBurua(rs.getInt("id"),rs.getString("izena"),rs.getString("abizena"),rs.getString("kargua"),rs.getString("email"),rs.getInt("telefonoa"),rs.getString("pasahitza"));
+		                	break;
 		                }
 		            } else {
 		                System.out.println("Posta edo pasahitza okerra da.");

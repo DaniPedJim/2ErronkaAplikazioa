@@ -18,6 +18,14 @@ public abstract class Pertsona {
 	private String pasahitza;
 	//Konstruktorea
 	public Pertsona() {};
+	public Pertsona(String ize,String abi,String kar,String ema,int tel,String pas) {
+		this.izena=ize;
+		this.abizena=abi;
+		this.kargua=kar;
+		this.email=ema;
+		this.telefonoa=tel;
+		this.pasahitza=pas;
+	}
 	public Pertsona(int id,String ize,String abi,String kar,String ema,int tel,String pas) {
 		this.id=id;
 		this.izena=ize;
@@ -30,12 +38,13 @@ public abstract class Pertsona {
 	//Metodoak
 	public void Fitxatu(String mota) {
         try (Connection conn = DatabaseConnection.getConnection()) {
-            String sql = "INSERT INTO fitxaketak (langile_id, data, mota, ordua) VALUES (?, ?, ?, ?)";
+        	Fitxaketak f=new Fitxaketak(this.id,Date.valueOf(LocalDate.now()),mota,Time.valueOf(LocalTime.now()));
+            String sql = "INSERT INTO fitxaketak (langilea_id, data, mota, ordua) VALUES (?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, this.id);
-            ps.setDate(2, Date.valueOf(LocalDate.now()));
-            ps.setString(3, mota);
-            ps.setTime(4, Time.valueOf(LocalTime.now()));
+            ps.setInt(1, f.getLangileId());
+            ps.setDate(2, f.getData());
+            ps.setString(3, f.getMota());
+            ps.setTime(4, f.getOrdua());
 
             int rows = ps.executeUpdate();
             if (rows > 0) {

@@ -1,12 +1,15 @@
 package erronka;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+
 
 public class Admin extends Pertsona {
 	//Konstruktorea
@@ -49,7 +52,22 @@ public class Admin extends Pertsona {
 		}
 	}
 	
-	public void PasahitzaAldatu() {}
+	public void PasahitzaAldatu(String pasahitz_berria, int langile_id) {
+		try (Connection conn = DatabaseConnection.getConnection()) {
+	        if (conn == null) {
+	           System.out.println("❌ Ezin izan da konektatu datu-basera.");
+	           return;
+	       }
+	       String sql= "UPDATE langileak SET pasahitza=? WHERE id=?";
+	       PreparedStatement ps = conn.prepareStatement(sql);
+	       ps.setString(1, pasahitz_berria);
+	       ps.setInt(2, langile_id);
+	       ps.executeUpdate();
+	       
+		}catch(Exception e){
+			System.out.println(" Errorea datu-basearekin: " + e.getMessage());
+		}
+	}
 	
 	public void ErosketaIkusi(JTable table,Connection conn) {
 		String sql = "select * from erosketak";
@@ -191,6 +209,20 @@ public class Admin extends Pertsona {
 		}
 	}
 	
-	public void ErabiltzaileakEzabatu() {}
+	public void ErabiltzaileakEzabatu(int erabiltzaile_id) {
+		try (Connection conn = DatabaseConnection.getConnection()) {
+	        if (conn == null) {
+	           System.out.println("❌ Ezin izan da konektatu datu-basera.");
+	           return;
+	       }
+	       String sql= "DELETE FROM erabiltzaileak WHERE id=?";
+	       PreparedStatement ps = conn.prepareStatement(sql);
+	       ps.setInt(1, erabiltzaile_id);
+	       ps.executeUpdate();
+	       
+		}catch(Exception e){
+			System.out.println(" Errorea datu-basearekin: " + e.getMessage());
+		}
+	}
 	
 }

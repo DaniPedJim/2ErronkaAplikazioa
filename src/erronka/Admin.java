@@ -18,7 +18,21 @@ public class Admin extends Pertsona {
 		super(id,ize,abi,kar,ema,tel,pas);
 	}
 	//Metodoak
-	public void IritziakEzabatu() {}
+	public void IritziakEzabatu(int iritzi_id) {
+		try (Connection conn = DatabaseConnection.getConnection()) {
+	        if (conn == null) {
+	           System.out.println("❌ Ezin izan da konektatu datu-basera.");
+	           return;
+	       }
+	       String sql= "DELETE FROM feedback WHERE id=?";
+	       PreparedStatement ps = conn.prepareStatement(sql);
+	       ps.setInt(1, iritzi_id );
+	       ps.executeUpdate();
+	       
+		}catch(Exception e){
+			System.out.println(" Errorea datu-basearekin: " + e.getMessage());
+		}
+	}
 	
 	public void IritziakIrakurri(JTable table,Connection conn) {
 		String sql = "select * from bezeroak";

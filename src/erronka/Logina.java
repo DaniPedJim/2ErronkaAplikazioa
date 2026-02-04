@@ -86,6 +86,258 @@ public class Logina extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		//
+		
+		JPanel panelLangileBurua = new JPanel();
+		panelLangileBurua.setVisible(false);
+		panelLangileBurua.setBounds(0, 0, 586, 263);
+		contentPane.add(panelLangileBurua);
+		panelLangileBurua.setLayout(null);
+
+		tableLangileBurua = new JTable();
+		tableLangileBurua.setBounds(187, 10, 389, 108);
+		panelLangileBurua.add(tableLangileBurua);
+
+		JToggleButton tglbtnErosketaProduktuaIkusiLB = new JToggleButton("Aldatu tabla");
+		tglbtnErosketaProduktuaIkusiLB.setBounds(487, 128, 89, 20);
+		panelLangileBurua.add(tglbtnErosketaProduktuaIkusiLB);
+
+		lb.KonpondutakoProduktuakIkusi(tableLangileBurua,conn);
+		tglbtnErosketaProduktuaIkusiLB.addActionListener(e -> {
+		if(tglbtnErosketaProduktuaIkusiLB.isSelected()) {
+		lb.ErosketaIkusi(tableLangileBurua,conn);
+		}else {
+		lb.KonpondutakoProduktuakIkusi(tableLangileBurua,conn);
+		}
+		});
+
+		JButton btnFitxatuIrteera = new JButton("Fitxatu irteera");
+		btnFitxatuIrteera.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		lb.Fitxatu("irteera");
+		}
+		});
+		btnFitxatuIrteera.setBounds(99, 239, 96, 20);
+		panelLangileBurua.add(btnFitxatuIrteera);
+
+		JButton btnFitxatuSarrera = new JButton("Fitxatu Sarrera");
+		btnFitxatuSarrera.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		lb.Fitxatu("sarrera");
+		}
+		});
+		btnFitxatuSarrera.setBounds(0, 239, 101, 20);
+		panelLangileBurua.add(btnFitxatuSarrera);
+
+		JLabel lblIzenaLB = new JLabel("Izena:");
+		lblIzenaLB.setBounds(0, 11, 89, 12);
+		panelLangileBurua.add(lblIzenaLB);
+
+		JLabel lblMotaLB = new JLabel("Mota:");
+		lblMotaLB.setBounds(0, 33, 89, 12);
+		panelLangileBurua.add(lblMotaLB);
+
+		JLabel lblPrezioaLB = new JLabel("Prezioa:");
+		lblPrezioaLB.setBounds(0, 55, 89, 12);
+		panelLangileBurua.add(lblPrezioaLB);
+
+		JLabel lblKategoriaLB = new JLabel("Kategoria:");
+		lblKategoriaLB.setBounds(0, 77, 89, 12);
+		panelLangileBurua.add(lblKategoriaLB);
+
+		JLabel lblEgoeraLB = new JLabel("Egoera:");
+		lblEgoeraLB.setBounds(0, 99, 89, 12);
+		panelLangileBurua.add(lblEgoeraLB);
+
+		JLabel lblModeloaLB = new JLabel("Modeloa:");
+		lblModeloaLB.setBounds(0, 121, 89, 12);
+		panelLangileBurua.add(lblModeloaLB);
+
+		JLabel lblKonektibitateaLB = new JLabel("Konektibitatea:");
+		lblKonektibitateaLB.setBounds(0, 143, 89, 12);
+		panelLangileBurua.add(lblKonektibitateaLB);
+
+		JLabel lblStockLB = new JLabel("Stock:");
+		lblStockLB.setBounds(0, 165, 89, 12);
+		panelLangileBurua.add(lblStockLB);
+
+		JLabel lblArgazkiaLB = new JLabel("Argazkia:");
+		lblArgazkiaLB.setBounds(0, 187, 89, 12);
+		panelLangileBurua.add(lblArgazkiaLB);
+
+		textIzenaLB = new JTextField();
+		textIzenaLB.setBounds(99, 8, 78, 18);
+		panelLangileBurua.add(textIzenaLB);
+		textIzenaLB.setColumns(10);
+
+		textMotaLB = new JTextField();
+		textMotaLB.setColumns(10);
+		textMotaLB.setBounds(99, 30, 78, 18);
+		panelLangileBurua.add(textMotaLB);
+
+		textPrezioaLB = new JTextField();
+		textPrezioaLB.setColumns(10);
+		textPrezioaLB.setBounds(99, 52, 78, 18);
+		panelLangileBurua.add(textPrezioaLB);
+
+		textKategoriaLB = new JTextField();
+		textKategoriaLB.setColumns(10);
+		textKategoriaLB.setBounds(99, 74, 78, 18);
+		panelLangileBurua.add(textKategoriaLB);
+
+		JComboBox comboBoxEgoeraLB = new JComboBox();
+		comboBoxEgoeraLB.setModel(new DefaultComboBoxModel(new String[] {"Ez ikusgai", "Ikusgai"}));
+		comboBoxEgoeraLB.setBounds(99, 96, 78, 18);
+		panelLangileBurua.add(comboBoxEgoeraLB);
+
+		textModeloaLB = new JTextField();
+		textModeloaLB.setColumns(10);
+		textModeloaLB.setBounds(99, 118, 78, 18);
+		panelLangileBurua.add(textModeloaLB);
+
+		textKonektibitateaLB = new JTextField();
+		textKonektibitateaLB.setColumns(10);
+		textKonektibitateaLB.setBounds(99, 140, 78, 18);
+		panelLangileBurua.add(textKonektibitateaLB);
+
+		textStockLB = new JTextField();
+		textStockLB.setColumns(10);
+		textStockLB.setBounds(99, 162, 78, 18);
+		panelLangileBurua.add(textStockLB);
+
+		textArgazkiaLB = new JTextField();
+		textArgazkiaLB.setColumns(10);
+		textArgazkiaLB.setBounds(99, 184, 78, 18);
+		panelLangileBurua.add(textArgazkiaLB);
+
+		JButton btnGehituProduktuaLB = new JButton("Gehitu produktua");
+		btnGehituProduktuaLB.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		Produktua p=new Produktua(textIzenaLB.getText(),textKategoriaLB.getText(),textMotaLB.getText(),textModeloaLB.getText(),Double.parseDouble(textPrezioaLB.getText()),textKonektibitateaLB.getText(),textArgazkiaLB.getText(),(comboBoxEgoeraLB.getSelectedItem()).toString(),Integer.parseInt(textStockLB.getText()));
+		lb.gehitu(p);
+		}
+		});
+		btnGehituProduktuaLB.setBounds(0, 209, 176, 20);
+		panelLangileBurua.add(btnGehituProduktuaLB);
+
+		JLabel lblKopLB = new JLabel("Kopurua");
+		lblKopLB.setBounds(280, 121, 57, 12);
+		panelLangileBurua.add(lblKopLB);
+
+		JComboBox comboBoxStockLB = new JComboBox();
+		comboBoxStockLB.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		comboBoxStockLB.setBounds(280, 135, 57, 20);
+		panelLangileBurua.add(comboBoxStockLB);
+
+		JLabel lblProduktuIdLB = new JLabel("Produktu id");
+		lblProduktuIdLB.setBounds(205, 144, 68, 12);
+		panelLangileBurua.add(lblProduktuIdLB);
+
+		textProduktuIdLB = new JTextField();
+		textProduktuIdLB.setBounds(205, 159, 68, 18);
+		panelLangileBurua.add(textProduktuIdLB);
+		textProduktuIdLB.setColumns(10);
+
+		JButton btnKantitateaGehituLB = new JButton("Kantitatea gehitu");
+		btnKantitateaGehituLB.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		int kop=comboBoxStockLB.getSelectedIndex();
+		int id=Integer.parseInt(textProduktuIdLB.getText());
+		lb.ProduktuKantitateaGehitu(id, (kop+1));
+		}
+		});
+		btnKantitateaGehituLB.setBounds(347, 139, 112, 20);
+		panelLangileBurua.add(btnKantitateaGehituLB);
+
+		JLabel lblIzenaLangile = new JLabel("Izena:");
+		lblIzenaLangile.setBounds(205, 221, 44, 12);
+		panelLangileBurua.add(lblIzenaLangile);
+
+		JLabel lblAbizenaLangile = new JLabel("Abizena:");
+		lblAbizenaLangile.setBounds(205, 243, 54, 12);
+		panelLangileBurua.add(lblAbizenaLangile);
+
+		JLabel lblTelefonoaLangile = new JLabel("Telefonoa:");
+		lblTelefonoaLangile.setBounds(304, 221, 67, 12);
+		panelLangileBurua.add(lblTelefonoaLangile);
+
+		JLabel lblEmailLangile = new JLabel("Email:");
+		lblEmailLangile.setBounds(304, 243, 44, 12);
+		panelLangileBurua.add(lblEmailLangile);
+
+		JLabel lblKarguaLangile = new JLabel("Kargua:");
+		lblKarguaLangile.setBounds(414, 243, 44, 12);
+		panelLangileBurua.add(lblKarguaLangile);
+
+		textIzenaLangile = new JTextField();
+		textIzenaLangile.setBounds(250, 220, 44, 18);
+		panelLangileBurua.add(textIzenaLangile);
+		textIzenaLangile.setColumns(10);
+
+		textAbizenaLangile = new JTextField();
+		textAbizenaLangile.setColumns(10);
+		textAbizenaLangile.setBounds(250, 240, 44, 18);
+		panelLangileBurua.add(textAbizenaLangile);
+
+		textTelefonoaLangile = new JTextField();
+		textTelefonoaLangile.setColumns(10);
+		textTelefonoaLangile.setBounds(357, 218, 68, 18);
+		panelLangileBurua.add(textTelefonoaLangile);
+
+		textEmailLangile = new JTextField();
+		textEmailLangile.setColumns(10);
+		textEmailLangile.setBounds(347, 240, 57, 18);
+		panelLangileBurua.add(textEmailLangile);
+
+		JComboBox comboBoxLangile = new JComboBox();
+		comboBoxLangile.setModel(new DefaultComboBoxModel(new String[] {"Informatikoa", "Langile burua"}));
+		comboBoxLangile.setBounds(464, 239, 112, 20);
+		panelLangileBurua.add(comboBoxLangile);
+
+		JLabel lblPasahitzaLangile = new JLabel("Pasahitza:");
+		lblPasahitzaLangile.setBounds(435, 221, 57, 12);
+		panelLangileBurua.add(lblPasahitzaLangile);
+
+		textPasahitzaLangile = new JTextField();
+		textPasahitzaLangile.setBounds(487, 218, 68, 18);
+		panelLangileBurua.add(textPasahitzaLangile);
+		textPasahitzaLangile.setColumns(10);
+
+		JButton btnGehituLangilea = new JButton("Gehitu langilea");
+		btnGehituLangilea.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		String aukera=(comboBoxLangile.getSelectedItem()).toString();
+		Pertsona p;
+		if(aukera.equals("Informatikoa")) {
+		p=new Informatikoa(textIzenaLangile.getText(),textAbizenaLangile.getText(),aukera,textEmailLangile.getText(),Integer.parseInt(textTelefonoaLangile.getText()),textPasahitzaLangile.getText());
+		}else {
+		p=new LangileBurua(textIzenaLangile.getText(),textAbizenaLangile.getText(),aukera,textEmailLangile.getText(),Integer.parseInt(textTelefonoaLangile.getText()),textPasahitzaLangile.getText());
+		}
+		lb.LangileakGehitu(p);
+		}
+		});
+		btnGehituLangilea.setBounds(487, 187, 106, 20);
+		panelLangileBurua.add(btnGehituLangilea);
+
+		JLabel lblPrezioaAldatu = new JLabel("Prezioa");
+		lblPrezioaAldatu.setBounds(280, 165, 44, 12);
+		panelLangileBurua.add(lblPrezioaAldatu);
+
+		textPrezioaAldatu = new JTextField();
+		textPrezioaAldatu.setBounds(280, 184, 57, 18);
+		panelLangileBurua.add(textPrezioaAldatu);
+		textPrezioaAldatu.setColumns(10);
+
+		JButton btnPrezioaAldatu = new JButton("Prezioa aldatu");
+		btnPrezioaAldatu.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		double prezioa=Double.parseDouble(textPrezioaAldatu.getText());
+		int id=Integer.parseInt(textProduktuIdLB.getText());
+		lb.ProduktuPrezioaAldatu(id,prezioa);
+		}
+		});
+		btnPrezioaAldatu.setBounds(347, 183, 112, 20);
+		panelLangileBurua.add(btnPrezioaAldatu);
 		
 		
 		/*
@@ -338,5 +590,7 @@ public class Logina extends JFrame {
 		JSeparator separator_3 = new JSeparator();
 		separator_3.setBounds(128, 210, 129, 6);
 		panelLogin.add(separator_3);
-	}
+	
+
+		}
 }

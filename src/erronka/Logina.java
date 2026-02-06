@@ -58,11 +58,11 @@ public class Logina extends JFrame {
 	private JTextField textEmailLangile;
 	private JTextField textPrezioaAldatu;
 	private JTextField textPasahitzaLangile;
-	private JTextField lang_id;
-	private JTextField pas_berria;
+	private JTextField textField;
+	private JTextField textField_1;
 	private JTable table;
-	private JTextField iritzi_id;
-	private JTextField era_id;
+	private JTextField textField_2;
+	private JTextField textField_3;
 
 	/**
 	 * Launch the application.
@@ -97,6 +97,99 @@ public class Logina extends JFrame {
 		
 		JPanel panelLangileBurua = new JPanel();
 		panelLangileBurua.setVisible(false);
+		
+		JPanel adminp = new JPanel();
+		adminp.setLayout(null);
+		adminp.setBounds(0, 0, 585, 262);
+		contentPane.add(adminp);
+		
+		JButton btnNewButton = new JButton("Iritzia ezabatu");
+		btnNewButton.setBounds(356, 100, 106, 20);
+		adminp.add(btnNewButton);
+		
+		JButton btnIritziaAldatu = new JButton("Iritziak ikusi");
+		btnIritziaAldatu.setBounds(20, 242, 106, 20);
+		adminp.add(btnIritziaAldatu);
+		
+		JLabel lblNewLabel = new JLabel("Langile id: ");
+		lblNewLabel.setBounds(221, 104, 49, 12);
+		adminp.add(lblNewLabel);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(366, 39, 96, 17);
+		adminp.add(textField);
+		
+		JLabel lblNewLabel_1 = new JLabel("Pasahitz berria: ");
+		lblNewLabel_1.setBounds(251, 79, 74, 12);
+		adminp.add(lblNewLabel_1);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(241, 145, 96, 17);
+		adminp.add(textField_1);
+		
+		JButton btnPasahitzaAldatu = new JButton("Pasahitza aldatu");
+		btnPasahitzaAldatu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnPasahitzaAldatu.setBounds(241, 37, 120, 20);
+		adminp.add(btnPasahitzaAldatu);
+		
+		JButton btnLangileenInfIkusi = new JButton("langileen info ikusi");
+		btnLangileenInfIkusi.setBounds(236, 185, 184, 20);
+		adminp.add(btnLangileenInfIkusi);
+		
+		JButton btnErosketakIkusi = new JButton("Erosketak ikusi");
+		btnErosketakIkusi.setBounds(10, 220, 216, 20);
+		adminp.add(btnErosketakIkusi);
+		
+		JButton btnKonponketaErregistroa = new JButton("Konponketa erregistroa ikusi");
+		btnKonponketaErregistroa.setBounds(251, 232, 205, 20);
+		adminp.add(btnKonponketaErregistroa);
+		
+		JButton btnErabiltzaileakIkusi = new JButton("Erabiltzaileak ikusi");
+		btnErabiltzaileakIkusi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnErabiltzaileakIkusi.setBounds(132, 242, 120, 20);
+		adminp.add(btnErabiltzaileakIkusi);
+		
+		JButton btnErabiltzaileakEzabatu = new JButton("Erabiltzaileak ezabatu");
+		btnErabiltzaileakEzabatu.setBounds(314, 66, 205, 20);
+		adminp.add(btnErabiltzaileakEzabatu);
+		
+		JButton btnNewButton_1 = new JButton("Fitxatu Irteera");
+		btnNewButton_1.setBounds(413, 185, 106, 20);
+		adminp.add(btnNewButton_1);
+		
+		JButton btnNewButton_1_1 = new JButton("Fitxatu sarrera");
+		btnNewButton_1_1.setBounds(362, 161, 105, 20);
+		adminp.add(btnNewButton_1_1);
+		
+		table = new JTable();
+		table.setBounds(10, 17, 230, 205);
+		adminp.add(table);
+		
+		JLabel lblIritziId = new JLabel("Iritzi id: ");
+		lblIritziId.setBounds(276, 0, 49, 12);
+		adminp.add(lblIritziId);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(337, 16, 96, 17);
+		adminp.add(textField_2);
+		
+		JLabel lblErabiltzaileId = new JLabel("Erabiltzaile id: ");
+		lblErabiltzaileId.setBounds(428, 0, 74, 12);
+		adminp.add(lblErabiltzaileId);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(423, 16, 96, 17);
+		adminp.add(textField_3);
 		panelLangileBurua.setBounds(0, 0, 586, 263);
 		contentPane.add(panelLangileBurua);
 		panelLangileBurua.setLayout(null);
@@ -597,136 +690,5 @@ public class Logina extends JFrame {
 		JSeparator separator_3 = new JSeparator();
 		separator_3.setBounds(128, 210, 129, 6);
 		panelLogin.add(separator_3);
-
-		
-		
-		/*
-					MENU ADMIN
-		*/
-		
-		
-		JButton btnNewButton = new JButton("Iritzia ezabatu");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				a.IritziakEzabatu(Integer.parseInt(iritzi_id.getText()));
-			}
-		});
-		btnNewButton.setBounds(319, 107, 107, 21);
-		contentPane.add(btnNewButton);
-		
-		JButton btnIritziaAldatu = new JButton("Iritziak ikusi");
-		btnIritziaAldatu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				a.IritziakIrakurri(table,conn);
-			}
-		});
-		btnIritziaAldatu.setBounds(0, 241, 107, 21);
-		contentPane.add(btnIritziaAldatu);
-		
-		JLabel lblNewLabel = new JLabel("Langile id: ");
-		lblNewLabel.setBounds(276, 13, 50, 12);
-		contentPane.add(lblNewLabel);
-		
-		lang_id = new JTextField();
-		lang_id.setBounds(330, 10, 96, 18);
-		contentPane.add(lang_id);
-		lang_id.setColumns(10);
-		
-		JLabel lblNewLabel_1 = new JLabel("Pasahitz berria: ");
-		lblNewLabel_1.setBounds(251, 32, 75, 12);
-		contentPane.add(lblNewLabel_1);
-		
-		pas_berria = new JTextField();
-		pas_berria.setColumns(10);
-		pas_berria.setBounds(330, 29, 96, 18);
-		contentPane.add(pas_berria);
-		
-		JButton btnPasahitzaAldatu = new JButton("Pasahitza aldatu");
-		btnPasahitzaAldatu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				a.PasahitzaAldatu(pas_berria.getText(),Integer.parseInt(lang_id.getText()));
-			}
-		});
-		btnPasahitzaAldatu.setBounds(305, 54, 121, 21);
-		contentPane.add(btnPasahitzaAldatu);
-		
-		JButton btnLangileenInfIkusi = new JButton("langileen info ikusi");
-		btnLangileenInfIkusi.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				a.LangileenInformazioaIkusi(table,conn);
-			}
-		});
-		btnLangileenInfIkusi.setBounds(251, 197, 185, 21);
-		contentPane.add(btnLangileenInfIkusi);
-		
-		JButton btnErosketakIkusi = new JButton("Erosketak ikusi");
-		btnErosketakIkusi.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				a.ErosketaIkusi(table,conn);
-			}
-		});
-		btnErosketakIkusi.setBounds(0, 219, 217, 21);
-		contentPane.add(btnErosketakIkusi);
-		
-		JButton btnKonponketaErregistroa = new JButton("Konponketa erregistroa ikusi");
-		btnKonponketaErregistroa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				a.KonpondutakoProduktuakIkusi(table,conn);
-			}
-		});
-		btnKonponketaErregistroa.setBounds(230, 241, 206, 21);
-		contentPane.add(btnKonponketaErregistroa);
-		
-		JButton btnErabiltzaileakIkusi = new JButton("Erabiltzaileak ikusi");
-		btnErabiltzaileakIkusi.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				a.ErabiltzaileakIkusi(table,conn);
-			}
-		});
-		btnErabiltzaileakIkusi.setBounds(107, 241, 121, 21);
-		contentPane.add(btnErabiltzaileakIkusi);
-		
-		JButton btnErabiltzaileakEzabatu = new JButton("Erabiltzaileak ezabatu");
-		btnErabiltzaileakEzabatu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				a.ErabiltzaileakEzabatu(Integer.parseInt(era_id.getText()));
-			}
-		});
-		btnErabiltzaileakEzabatu.setBounds(251, 166, 206, 21);
-		contentPane.add(btnErabiltzaileakEzabatu);
-		
-		JButton btnNewButton_1 = new JButton("Fitxatu Irteera");
-		btnNewButton_1.setBounds(329, 219, 107, 20);
-		contentPane.add(btnNewButton_1);
-		
-		JButton btnNewButton_1_1 = new JButton("Fitxatu sarrera");
-		btnNewButton_1_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton_1_1.setBounds(220, 219, 106, 20);
-		contentPane.add(btnNewButton_1_1);
-		
-		table = new JTable();
-		table.setBounds(10, 12, 231, 206);
-		contentPane.add(table);
-		
-		JLabel lblIritziId = new JLabel("Iritzi id: ");
-		lblIritziId.setBounds(293, 88, 50, 12);
-		contentPane.add(lblIritziId);
-		
-		iritzi_id = new JTextField();
-		iritzi_id.setColumns(10);
-		iritzi_id.setBounds(330, 85, 96, 18);
-		contentPane.add(iritzi_id);
-		
-		JLabel lblErabiltzaileId = new JLabel("Erabiltzaile id: ");
-		lblErabiltzaileId.setBounds(263, 144, 75, 12);
-		contentPane.add(lblErabiltzaileId);
-		
-		era_id = new JTextField();
-		era_id.setColumns(10);
-		era_id.setBounds(329, 141, 96, 18);
-		contentPane.add(era_id);
 	}
 }

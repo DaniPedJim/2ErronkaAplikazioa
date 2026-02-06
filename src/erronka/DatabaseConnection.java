@@ -10,8 +10,8 @@ public class DatabaseConnection {
     private static final String USER = "inigo";
     private static final String PASSWORD = "1MG32025";
     */
-	private static final String URL = "jdbc:mysql://localhost/erronka2";
-    private static final String USER = "root";
+	private static final String URL = "jdbc:mysql://192.168.115.154/erronka2";
+    private static final String USER = "admin";
     private static final String PASSWORD = "1MG32025";
 	
 	

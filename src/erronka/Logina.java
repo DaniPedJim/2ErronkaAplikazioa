@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -19,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.JToggleButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+
 
 public class Logina extends JFrame {
 
@@ -40,22 +42,11 @@ public class Logina extends JFrame {
 	private JTextField textModeloaInf;
 	private JTextField textArgazkiaInf;
 	private JTextField textAldatuSaltzekoEgoera;
-	private JTable tableLangileBurua;
-	private JTextField textIzenaLB;
-	private JTextField textMotaLB;
-	private JTextField textPrezioaLB;
-	private JTextField textKategoriaLB;
-	private JTextField textModeloaLB;
-	private JTextField textKonektibitateaLB;
-	private JTextField textStockLB;
-	private JTextField textArgazkiaLB;
-	private JTextField textProduktuIdLB;
-	private JTextField textIzenaLangile;
-	private JTextField textAbizenaLangile;
-	private JTextField textTelefonoaLangile;
-	private JTextField textEmailLangile;
-	private JTextField textPrezioaAldatu;
-	private JTextField textPasahitzaLangile;
+	private JTextField lang_id;
+	private JTextField pas_berria;
+	private JTable table;
+	private JTextField iritzi_id;
+	private JTextField era_id;
 
 	/**
 	 * Launch the application.
@@ -338,5 +329,136 @@ public class Logina extends JFrame {
 		JSeparator separator_3 = new JSeparator();
 		separator_3.setBounds(128, 210, 129, 6);
 		panelLogin.add(separator_3);
+		
+		
+		/*
+					MENU ADMIN
+		*/
+		
+		
+		JButton btnNewButton = new JButton("Iritzia ezabatu");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				a.IritziakEzabatu(Integer.parseInt(iritzi_id.getText()));
+			}
+		});
+		btnNewButton.setBounds(319, 107, 107, 21);
+		contentPane.add(btnNewButton);
+		
+		JButton btnIritziaAldatu = new JButton("Iritziak ikusi");
+		btnIritziaAldatu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				a.IritziakIrakurri(table,conn);
+			}
+		});
+		btnIritziaAldatu.setBounds(0, 241, 107, 21);
+		contentPane.add(btnIritziaAldatu);
+		
+		JLabel lblNewLabel = new JLabel("Langile id: ");
+		lblNewLabel.setBounds(276, 13, 50, 12);
+		contentPane.add(lblNewLabel);
+		
+		lang_id = new JTextField();
+		lang_id.setBounds(330, 10, 96, 18);
+		contentPane.add(lang_id);
+		lang_id.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("Pasahitz berria: ");
+		lblNewLabel_1.setBounds(251, 32, 75, 12);
+		contentPane.add(lblNewLabel_1);
+		
+		pas_berria = new JTextField();
+		pas_berria.setColumns(10);
+		pas_berria.setBounds(330, 29, 96, 18);
+		contentPane.add(pas_berria);
+		
+		JButton btnPasahitzaAldatu = new JButton("Pasahitza aldatu");
+		btnPasahitzaAldatu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				a.PasahitzaAldatu(pas_berria.getText(),Integer.parseInt(lang_id.getText()));
+			}
+		});
+		btnPasahitzaAldatu.setBounds(305, 54, 121, 21);
+		contentPane.add(btnPasahitzaAldatu);
+		
+		JButton btnLangileenInfIkusi = new JButton("langileen info ikusi");
+		btnLangileenInfIkusi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				a.LangileenInformazioaIkusi(table,conn);
+			}
+		});
+		btnLangileenInfIkusi.setBounds(251, 197, 185, 21);
+		contentPane.add(btnLangileenInfIkusi);
+		
+		JButton btnErosketakIkusi = new JButton("Erosketak ikusi");
+		btnErosketakIkusi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				a.ErosketaIkusi(table,conn);
+			}
+		});
+		btnErosketakIkusi.setBounds(0, 219, 217, 21);
+		contentPane.add(btnErosketakIkusi);
+		
+		JButton btnKonponketaErregistroa = new JButton("Konponketa erregistroa ikusi");
+		btnKonponketaErregistroa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				a.KonpondutakoProduktuakIkusi(table,conn);
+			}
+		});
+		btnKonponketaErregistroa.setBounds(230, 241, 206, 21);
+		contentPane.add(btnKonponketaErregistroa);
+		
+		JButton btnErabiltzaileakIkusi = new JButton("Erabiltzaileak ikusi");
+		btnErabiltzaileakIkusi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				a.ErabiltzaileakIkusi(table,conn);
+			}
+		});
+		btnErabiltzaileakIkusi.setBounds(107, 241, 121, 21);
+		contentPane.add(btnErabiltzaileakIkusi);
+		
+		JButton btnErabiltzaileakEzabatu = new JButton("Erabiltzaileak ezabatu");
+		btnErabiltzaileakEzabatu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				a.ErabiltzaileakEzabatu(Integer.parseInt(era_id.getText()));
+			}
+		});
+		btnErabiltzaileakEzabatu.setBounds(251, 166, 206, 21);
+		contentPane.add(btnErabiltzaileakEzabatu);
+		
+		JButton btnNewButton_1 = new JButton("Fitxatu Irteera");
+		btnNewButton_1.setBounds(329, 219, 107, 20);
+		contentPane.add(btnNewButton_1);
+		
+		JButton btnNewButton_1_1 = new JButton("Fitxatu sarrera");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_1_1.setBounds(220, 219, 106, 20);
+		contentPane.add(btnNewButton_1_1);
+		
+		table = new JTable();
+		table.setBounds(10, 12, 231, 206);
+		contentPane.add(table);
+		
+		JLabel lblIritziId = new JLabel("Iritzi id: ");
+		lblIritziId.setBounds(293, 88, 50, 12);
+		contentPane.add(lblIritziId);
+		
+		iritzi_id = new JTextField();
+		iritzi_id.setColumns(10);
+		iritzi_id.setBounds(330, 85, 96, 18);
+		contentPane.add(iritzi_id);
+		
+		JLabel lblErabiltzaileId = new JLabel("Erabiltzaile id: ");
+		lblErabiltzaileId.setBounds(263, 144, 75, 12);
+		contentPane.add(lblErabiltzaileId);
+		
+		era_id = new JTextField();
+		era_id.setColumns(10);
+		era_id.setBounds(329, 141, 96, 18);
+		contentPane.add(era_id);
 	}
+	
 }

@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -614,6 +616,11 @@ public class Logina extends JFrame {
 						String rutaLocala = eros.fakturaSortu(eros.getId());
 						String pdfIzena = "faktura_" + eros.getId() + ".pdf";
 						eros.fakturaIgo(rutaLocala, pdfIzena);
+						try {
+							Files.deleteIfExists(Paths.get(rutaLocala));
+						} catch (Exception e2) {
+							e2.printStackTrace();
+						}
 						eros.setPdf("http://192.168.115.154/ERRONKA2/pdf/" + pdfIzena);
 						eros.setBidalketa_egoera("prest");
 						sql = "update erosketak set bidalketa_egoera=?, factura_pdf=? where id=?";

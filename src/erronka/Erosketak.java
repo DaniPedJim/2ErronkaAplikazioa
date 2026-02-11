@@ -2,6 +2,9 @@ package erronka;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -48,7 +51,6 @@ public class Erosketak {
 			// Lehenengo orria sortu
 			PDPage page = new PDPage();
 			document.addPage(page);
-
 			PDPageContentStream content = new PDPageContentStream(document, page);
 			content.beginText();
 			// Orriaren tamaina
@@ -71,7 +73,8 @@ public class Erosketak {
 			content.showText("20240 Ordizia, Gipuzkoa");
 			content.endText();
 			// Logoa sortu eta jarri
-			PDImageXObject logoa = PDImageXObject.createFromFile("logoa/LogoErronka.png", document);
+			InputStream logoStream = getClass().getResourceAsStream("/LogoErronka.png");
+			PDImageXObject logoa = PDImageXObject.createFromByteArray(document,logoStream.readAllBytes(),"logo");
 			content.drawImage(logoa, pageWidth - 200, pageHeight - 125, 200, 118);
 			// Erosketaren taula sortu
 			int ardatzaX = 40;
@@ -114,7 +117,7 @@ public class Erosketak {
 							if (i == -1) {
 								informazioa = "€/UNIT";
 							} else {
-								informazioa = String.valueOf(lista.get(i).getPrezioa()) + "€";
+								informazioa = String.format("%.2f",lista.get(i).getPrezioa()) + "€";
 							}
 							width = 60;
 							break;
@@ -122,7 +125,7 @@ public class Erosketak {
 							if (i == -1) {
 								informazioa = "GUZTIRA";
 							} else {
-								informazioa = String.valueOf(lista.get(i).getKantitatea() * lista.get(i).getPrezioa())
+								informazioa = String.format("%.2f",lista.get(i).getKantitatea() * lista.get(i).getPrezioa())
 										+ "€";
 								totala += lista.get(i).getKantitatea() * lista.get(i).getPrezioa();
 							}
@@ -146,7 +149,7 @@ public class Erosketak {
 				content.newLineAtOffset(380, ardatzaY - 60);
 				content.showText("TOTALA:");
 				content.newLineAtOffset(90, 0);
-				content.showText(String.valueOf(totala + "€"));
+				content.showText(String.format("%.2f",totala));
 				content.endText();
 				// Textuak eta tabla bukatzen ditu eta pdf itxi
 				content.close();
@@ -179,9 +182,11 @@ public class Erosketak {
 			ftp.storeFile(rutaRemota + pdfIzena, fis);
 			ftp.logout();
 			ftp.disconnect();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	// Getter eta setter
